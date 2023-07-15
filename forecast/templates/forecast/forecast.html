@@ -1,0 +1,33 @@
+{% extends 'utils/base.html' %}
+
+{% block title %}Cities Weather{% endblock title %}
+
+{% block content %}
+    <form action="" method="post">
+        <div>
+            {% csrf_token %}
+            {{form}}
+            <span><input type="submit" value="search"></span>
+        </div>
+    </form>
+    <br>
+
+    <div>
+        <div class="col">
+           <div class="card mb-4 rounded-3 shadow-sm">
+             <div class="card-header py-3">
+               <h4><span>Weather Condition :</span> {{weather_cond}}</h4>
+               <small class="btn btn-primary">Check another weather condition</small>
+             </div>
+             <div class="card-body">
+                 {% for key,value in forecast_data.items%}
+                        {% comment %} <h4>{{data[0].value}}, state Temperature {{data[1].value}} degrees Fahrenheit and {{data[2].value}} mph wind speed</h4> {% endcomment %}
+                        <p>{{key}} {{value}}</p>
+                        <br>
+                 {% endfor %}
+             </div>
+           </div>
+       </div> 
+    </div>
+{% endblock content %}
+
