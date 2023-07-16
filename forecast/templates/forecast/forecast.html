@@ -20,9 +20,8 @@
                <small class="btn btn-primary">Check another weather condition</small>
              </div>
              <div class="card-body">
-                 {% for key,value in forecast_data.items%}
-                        {% comment %} <h4>{{data[0].value}}, state Temperature {{data[1].value}} degrees Fahrenheit and {{data[2].value}} mph wind speed</h4> {% endcomment %}
-                        <p>{{key}} {{value}}</p>
+                 {% for item in city_data%}
+                        <h4>{{item.city}}, {{item.state}} Temperature {{item.curr_temp}} degrees Fahrenheit and {{item.wind_speed}} mph wind speed</h4>
                         <br>
                  {% endfor %}
              </div>

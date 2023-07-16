@@ -47,13 +47,15 @@ def populate_db(dataset,api):
     for city, state in dataset:
         source = urlopen('https://api.openweathermap.org/data/2.5/weather?q='+city+','+state+'&appid='+api+'&units=imperial').read()
         city_data = json.loads(source)
+        state = state.replace('+',' ')
         # TODO: Add logic to not add duplicates, try to set timer, if changes in windspeed, curr_temp, or weathercond change the data
         weather_data = Weather(city=str(city_data['name']),
-                              curr_temp=round(float((city_data['main']['temp']))),
-                              wind_speed=str(city_data['wind']['speed']),
-                              weather_cond=str(city_data['weather'][0]['main']))
+                               state=state,
+                               curr_temp=round(float((city_data['main']['temp']))),
+                               wind_speed=str(city_data['wind']['speed']),
+                               weather_cond=str(city_data['weather'][0]['main']))
         city_weather_data.append(weather_data)
-    weather_data_set=Weather.objects.bulk_create(city_weather_data)
+    weather_data_set=Weather.objects.bulk_create(city_weather_data,ignore_conflicts=True)
 
 def forecast(request):
     """
@@ -65,20 +67,19 @@ def forecast(request):
 
     populate_db(dataset=cleaned_dataset,api=api)
 
-    city_data = Weather.objects.all()
-
     if request.method == "POST":
         form = ForecastForm(request.POST)
         if form.is_valid():
-            weather_cond = form.cleaned_data['weather_cond'].lower().title()
+            weather_condition = form.cleaned_data['weather_cond'].lower().title()
+            city_data = Weather.objects.filter(weather_cond=weather_condition)
             context ={
                 "city_data":city_data,
-                "weather_cond": weather_cond
+                "weather_cond": weather_condition
             }
-            messages.success("Some successful message")
+            # messages.success("Some successful message")
             return render(request,'forecast/forecast.html',context )  
-        else:
-            messages.error("Some error message")    
+        # else:
+        #     messages.error("Some error message")    
     else:
         form = ForecastForm()
         return render(request,'forecast/forecast.html',{'form':form})
