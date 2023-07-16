@@ -1,32 +1,21 @@
-{% extends 'utils/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}Cities Weather{% endblock title %}
 
 {% block content %}
-    <form action="" method="post">
-        <div>
-            {% csrf_token %}
-            {{form}}
-            <span><input type="submit" value="search"></span>
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="row">
+            <div class="col-xs-4">
+                <form action="" method="post">
+                    <div>
+                        {% csrf_token %}
+                        {{form}}
+                        <span><input type="submit" value="search"></span>
+                    </div>
+                </form>
+                <small><b>Choices(Thunderstorm, Drizzle, Rain, Snow, Atmosphere, Clear, Clouds)</b></small>
+                <br>
+            </div>
         </div>
-    </form>
-    <br>
-
-    <div>
-        <div class="col">
-           <div class="card mb-4 rounded-3 shadow-sm">
-             <div class="card-header py-3">
-               <h4><span>Weather Condition :</span> {{weather_cond}}</h4>
-               <small class="btn btn-primary">Check another weather condition</small>
-             </div>
-             <div class="card-body">
-                 {% for item in city_data%}
-                        <h4>{{item.city}}, {{item.state}} Temperature {{item.curr_temp}} degrees Fahrenheit and {{item.wind_speed}} mph wind speed</h4>
-                        <br>
-                 {% endfor %}
-             </div>
-           </div>
-       </div> 
-    </div>
+    </div> 
 {% endblock content %}
-

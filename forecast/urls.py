@@ -5,5 +5,5 @@ app_name="forecast"
 
 urlpatterns = [
     # index page url
-    path('',views.forecast,name='weather' ),
+    path('',views.forecast,name='weather'),
 ]

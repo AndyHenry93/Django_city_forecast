@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Forecast Results{% endblock title %}
+
+{% block content %}
+<div>
+    <div class="col">
+       <div class="card mb-4 rounded-3 shadow-sm">
+         <div class="card-header py-3">
+           <h4><span>Weather Condition :</span> {{weather_cond}}</h4>
+           <span class="d-flex flex-reverse">
+                    <button type="button" class="btn btn-outline-primary"><a href="{% url 'forecast:weather' %}">Check another condition</a></button>                
+           </span>
+         </div>
+         <div class="card-body">
+             {% for item in city_data%}
+                {% if weather_cond == item.weather_cond%}
+                    <p>{{item.city}}, {{item.state}} Temperature {{item.curr_temp}} degrees Fahrenheit and {{item.wind_speed}} mph wind speed</p>
+                    <br>
+                {% endif %}
+             {% endfor %} 
+         </div>
+       </div>
+   </div> 
+</div>
+{% endblock content %}

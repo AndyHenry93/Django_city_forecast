@@ -9,3 +9,6 @@ class Weather(models.Model):
 
     def __str__(self):
         return self.city
+    
+    class Meta:
+        verbose_name_plural = 'cities'
