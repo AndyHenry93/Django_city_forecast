@@ -123,3 +123,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Celery Backend config
+
+# CELERY_BROKER_URL = 'redis://localhost:6360'
+# CELERY_RESULT_BACKEND = 'redis://localhost:6360'
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_BEAT_SCHEDULE = {'task-number-one': {'task': 'forecast.tasks.weather_api','schedule': crontab(minute='*/5')}}
