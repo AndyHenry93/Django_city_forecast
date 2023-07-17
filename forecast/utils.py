@@ -1,6 +1,11 @@
 import gspread 
 import json
+import os
 from urllib.request import urlopen
+
+api = str(os.getenv('API_KEY'))
+bad_char = [' ','-','/']
+cond_list = ['Thunderstorm','Drizzle','Rain','Snow','Clear','Clouds','Mist','Smoke','Haze','Dust','Fog','Sand','Dust','Ash','Squall','Tornado']
 
 def get_data(file,range):
     # Using gspread to call the google sheets api and saving the dataset to the data variable
@@ -43,6 +48,12 @@ def weather_api(dataset,api):
             "wind_speed":str(city_data['wind']['speed']),
             "weather_cond":str(city_data['weather'][0]['main'])
             }
-        if weather_data["city"] not in city_weather_data:
-            city_weather_data.append(weather_data)          
+        city_weather_data.append(weather_data)          
     return city_weather_data
+
+def user_condition_input(dataset,user_input):
+    user_dataset = []
+    for item in dataset:
+        if user_input == item["weather_cond"]:
+            user_dataset.append(item)
+    return user_dataset

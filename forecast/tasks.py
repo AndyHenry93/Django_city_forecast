@@ -4,7 +4,7 @@ from __future__ import absolute_import, unicode_literals
 from celery import shared_task
 import json
 from urllib.request import urlopen
-
+from django.contrib import messages
 
 @shared_task
 def weather_api(dataset,api):
@@ -24,6 +24,10 @@ def weather_api(dataset,api):
         if weather_data["city"] not in city_weather_data:
             city_weather_data.append(weather_data)          
     return city_weather_data
+
+# @shared_task
+# def processing_api():
+#     return messages.info(request, "Processing, will return information soon")
 
 
 
