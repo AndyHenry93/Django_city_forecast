@@ -15,7 +15,6 @@ def forecast(request):
         # city_data = weather_api.delay(cleaned_dataset,api)
         # city_data = city_data.get()
 
-
         city_data = weather_api(dataset=cleaned_dataset,api=api)
         form = ForecastForm(request.POST)
         if form.is_valid():
