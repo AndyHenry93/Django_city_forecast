@@ -34,7 +34,7 @@ def forecast_list(request):
         weather_condtion = request.session["weather_condition"]
 
         # setup pagination 
-        paginator = Paginator(user_cond, 6) 
+        paginator = Paginator(user_cond, 10) 
         page = request.GET.get('page')
         try:
             cities = paginator.page(page)
