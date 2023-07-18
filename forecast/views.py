@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # from . tasks import weather_api
 
+# utils.py function calls 
 data = get_data(file='creds/creds.json',range='A2:B')
 cleaned_dataset = clean_dataset(dataset=data, bad_char_list=bad_char)
 
@@ -13,12 +14,16 @@ def forecast(request):
         # future update to implement Celery and redis
         # city_data = weather_api.delay(cleaned_dataset,api)
         # city_data = city_data.get()
+
+
         city_data = weather_api(dataset=cleaned_dataset,api=api)
         form = ForecastForm(request.POST)
         if form.is_valid():
+            # saving the users input to the weather condition variable
             weather_condition = form.cleaned_data['weather_cond'].lower().title()
             user_cond = user_condition_input(city_data,weather_condition)
 
+            # saving the user_cond list and weather input to session for access in the forecast_list view 
             request.session['user_cond'] = user_cond
             request.session['weather_condition'] = weather_condition
             return redirect("forecast:forecast_list")
