@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # from . tasks import weather_api
 
-data = get_data(file='creds.json',range='A2:B')
+data = get_data(file='creds/creds.json',range='A2:B')
 cleaned_dataset = clean_dataset(dataset=data, bad_char_list=bad_char)
 
 def forecast(request):
