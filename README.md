@@ -5,4 +5,5 @@
 ### Feel free to pull the git repository and review the code.
 ### The Docker container can be found here: https://hub.docker.com/r/andyhenry93/django-forecast-project
 ## Command to pull docker repo: docker pull andyhenry93/django-forecast-project  
+## command to run container: docker run -p 8000:8000 andyhenry93/django-forecast-project
 ## Call server: 127.0.0.1:8000
