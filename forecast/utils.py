@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # openweather api key saved in an env file 
-api = str(os.getenv('API_KEY'))
+api = "a8bc52868306f496a2a1c9e13586ac7b"
 
 # List of bad characters in the dataset that must be cleaned
 bad_char = [' ','-','/']
