@@ -13,28 +13,14 @@ bad_char = [' ','-','/']
 cond_list = ['Thunderstorm','Drizzle','Rain','Snow','Clear','Clouds','Mist','Smoke','Haze','Dust','Fog','Sand','Dust','Ash','Squall','Tornado']
 
 
-def get_data(range):
+def get_data(file,range):
     """
     Params: takes two parameters the file and range to be passed for google sheets api connections and validations
     process: passes the file name to the gspread package to begin the api call, next open the sheet with the needed data and save a sh
             pass the sheet property to sh with the range param and save as data.
     return: the dataset 
     """
-    credentials = {
-            "type": (os.getenv('service_account')),
-            "project_id": (os.getenv('project_id')),
-            "private_key_id": (os.getenv('private_key_id')),
-            "private_key": (os.getenv('private_key')),
-            "client_email": (os.getenv('client_email')),
-            "client_id": (os.getenv('client_id')),
-            "auth_uri": (os.getenv('auth_uri')),
-            "token_uri": (os.getenv('token_uri')),
-            "auth_provider_x509_cert_url": (os.getenv('auth_provider_x509_cert_url')),
-            "client_x509_cert_url": (os.getenv('client_x509_cert_url')),
-            "universe_domain": (os.getenv('universe_domain')),
-    }
-    # Using gspread to call the google sheets api and saving the dataset to the data variable
-    gc = gspread.service_account_from_dict(credentials)
+    gc = gspread.service_account(filename=file)
     sh = gc.open("interview_US Cities")
     data = sh.sheet1.get(range)
     return data
