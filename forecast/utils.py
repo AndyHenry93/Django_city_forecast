@@ -2,6 +2,8 @@ import gspread
 import json
 import os
 from urllib.request import urlopen
+from dotenv import load_dotenv
+load_dotenv()
 
 # openweather api key saved in an env file 
 api = str(os.getenv('API_KEY'))
