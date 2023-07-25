@@ -2,13 +2,16 @@ import gspread
 import json
 from urllib.request import urlopen
 import os
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
 
 # openweather api key saved in an env file 
 # api = str(os.getenv("API_KEY"))
-api = str(os.environ.get("API_KEY"))
+api = env("API_KEY")
 
 # List of bad characters in the dataset that must be cleaned
 bad_char = [' ','-','/']
@@ -16,8 +19,24 @@ bad_char = [' ','-','/']
 # list of avaliable weather condition that the user can call against the openweatherAPI
 cond_list = ['Thunderstorm','Drizzle','Rain','Snow','Clear','Clouds','Mist','Smoke','Haze','Dust','Fog','Sand','Dust','Ash','Squall','Tornado']
 
+# google api credentials
+credentials = {
+  "type": env("type"),
+  "project_id": env("project_id"),
+  "private_key_id": env("private_key_id"),
+  "private_key": env("private_key"),
+  "client_email": env("client_email"),
+  "client_id": env("client_id"),
+  "auth_uri": env("auth_uri"),
+  "token_uri": env("token_uri"),
+  "auth_provider_x509_cert_url": env("auth_provider_x509_cert_url"),
+  "client_x509_cert_url": env("client_x509_cert_url"),
+  "universe_domain": env("universe_domain")
+}
+
+
 # def get_data(file,range):
-def get_data(file,range):
+def get_data(range):
     """
     Params: takes two parameters the file and range to be passed for google sheets api connections and validations
     process: passes the file name to the gspread package to begin the api call, next open the sheet with the needed data and save a sh
@@ -26,7 +45,7 @@ def get_data(file,range):
     """
     # gc = gspread.service_account(filename=file)
     
-    gc = gspread.service_account(filename=file)
+    gc = gspread.service_account_from_dict(credentials)
     sh = gc.open("interview_US Cities")
     data = sh.sheet1.get(range)
     return data
