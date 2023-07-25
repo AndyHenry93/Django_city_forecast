@@ -8,7 +8,7 @@ load_dotenv()
 
 # openweather api key saved in an env file 
 # api = str(os.getenv("API_KEY"))
-api = os.environ.get("API_KEY")
+api = str(os.environ.get("API_KEY"))
 
 # List of bad characters in the dataset that must be cleaned
 bad_char = [' ','-','/']
@@ -31,17 +31,17 @@ cond_list = ['Thunderstorm','Drizzle','Rain','Snow','Clear','Clouds','Mist','Smo
 #   "universe_domain": str(os.getenv("universe_domain"))
 # }
 credentials = {
-  "type": os.environ.get("type"),
-  "project_id": os.environ.get("project_id"),
-  "private_key_id": os.environ.get("private_key_id"),
-  "private_key": os.environ.get("private_key"),
-  "client_email": os.environ.get("client_email"),
-  "client_id": os.environ.get("client_id"),
-  "auth_uri": os.environ.get("auth_uri"),
-  "token_uri": os.environ.get("token_uri"),
-  "auth_provider_x509_cert_url": os.environ.get("auth_provider_x509_cert_url"),
-  "client_x509_cert_url": os.environ.get("client_x509_cert_url"),
-  "universe_domain": os.environ.get("universe_domain"),
+  "type": str(os.environ.get("type")),
+  "project_id": str(os.environ.get("project_id")),
+  "private_key_id": str(os.environ.get("private_key_id")),
+  "private_key": str(os.environ.get("private_key")),
+  "client_email": str(os.environ.get("client_email")),
+  "client_id": str(os.environ.get("client_id")),
+  "auth_uri": str(os.environ.get("auth_uri")),
+  "token_uri": str(os.environ.get("token_uri")),
+  "auth_provider_x509_cert_url": str(os.environ.get("auth_provider_x509_cert_url")),
+  "client_x509_cert_url": str(os.environ.get("client_x509_cert_url")),
+  "universe_domain": str(os.environ.get("universe_domain")),
 }
 
 
