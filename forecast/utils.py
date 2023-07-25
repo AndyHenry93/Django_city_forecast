@@ -16,37 +16,8 @@ bad_char = [' ','-','/']
 # list of avaliable weather condition that the user can call against the openweatherAPI
 cond_list = ['Thunderstorm','Drizzle','Rain','Snow','Clear','Clouds','Mist','Smoke','Haze','Dust','Fog','Sand','Dust','Ash','Squall','Tornado']
 
-# google api credentials
-# credentials = {
-#   "type": str(os.getenv("type")),
-#   "project_id": str(os.getenv("project_id")),
-#   "private_key_id": str(os.getenv("private_key_id")),
-#   "private_key": str(os.getenv("private_key")),
-#   "client_email": str(os.getenv("client_email")),
-#   "client_id": str(os.getenv("client_id")),
-#   "auth_uri": str(os.getenv("auth_uri")),
-#   "token_uri": str(os.getenv("token_uri")),
-#   "auth_provider_x509_cert_url": str(os.getenv("auth_provider_x509_cert_url")),
-#   "client_x509_cert_url": str(os.getenv("client_x509_cert_url")),
-#   "universe_domain": str(os.getenv("universe_domain"))
-# }
-credentials = {
-  "type": str(os.environ.get("type")),
-  "project_id": str(os.environ.get("project_id")),
-  "private_key_id": str(os.environ.get("private_key_id")),
-  "private_key": str(os.environ.get("private_key")),
-  "client_email": str(os.environ.get("client_email")),
-  "client_id": str(os.environ.get("client_id")),
-  "auth_uri": str(os.environ.get("auth_uri")),
-  "token_uri": str(os.environ.get("token_uri")),
-  "auth_provider_x509_cert_url": str(os.environ.get("auth_provider_x509_cert_url")),
-  "client_x509_cert_url": str(os.environ.get("client_x509_cert_url")),
-  "universe_domain": str(os.environ.get("universe_domain")),
-}
-
-
 # def get_data(file,range):
-def get_data(range):
+def get_data(file,range):
     """
     Params: takes two parameters the file and range to be passed for google sheets api connections and validations
     process: passes the file name to the gspread package to begin the api call, next open the sheet with the needed data and save a sh
@@ -55,7 +26,7 @@ def get_data(range):
     """
     # gc = gspread.service_account(filename=file)
     
-    gc = gspread.service_account_from_dict(credentials)
+    gc = gspread.service_account(filename=file)
     sh = gc.open("interview_US Cities")
     data = sh.sheet1.get(range)
     return data
