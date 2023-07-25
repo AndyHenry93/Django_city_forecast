@@ -2,16 +2,12 @@ import gspread
 import json
 from urllib.request import urlopen
 import os
-# from dotenv import load_dotenv
-# load_dotenv()
-import environ
-env = environ.Env()
-environ.Env.read_env()
-
+from dotenv import load_dotenv
+load_dotenv()
 
 # openweather api key saved in an env file 
 # api = str(os.getenv("API_KEY"))
-api = env("API_KEY")
+api = str(os.getenv("API_KEY"))
 
 # List of bad characters in the dataset that must be cleaned
 bad_char = [' ','-','/']
@@ -21,17 +17,17 @@ cond_list = ['Thunderstorm','Drizzle','Rain','Snow','Clear','Clouds','Mist','Smo
 
 # google api credentials
 credentials = {
-  "type": env("type"),
-  "project_id": env("project_id"),
-  "private_key_id": env("private_key_id"),
-  "private_key": env("private_key"),
-  "client_email": env("client_email"),
-  "client_id": env("client_id"),
-  "auth_uri": env("auth_uri"),
-  "token_uri": env("token_uri"),
-  "auth_provider_x509_cert_url": env("auth_provider_x509_cert_url"),
-  "client_x509_cert_url": env("client_x509_cert_url"),
-  "universe_domain": env("universe_domain")
+  "type": str(os.getenv("type")),
+  "project_id": str(os.getenv("project_id")),
+  "private_key_id": str(os.getenv("private_key_id")),
+  "private_key": str(os.getenv("private_key")),
+  "client_email": str(os.getenv("client_email")),
+  "client_id": str(os.getenv("client_id")),
+  "auth_uri": str(os.getenv("auth_uri")),
+  "token_uri": str(os.getenv("token_uri")),
+  "auth_provider_x509_cert_url": str(os.getenv("auth_provider_x509_cert_url")),
+  "client_x509_cert_url": str(os.getenv("client_x509_cert_url")),
+  "universe_domain": str(os.getenv("universe_domain")),
 }
 
 
